@@ -1,15 +1,134 @@
----
-output: pdf_document
----
 
-## Today:
-- Navigating Files and Directories (review and new)
-- Practice practical question
+## Lesson 1 START Lab 2
+
+### Questions:
+- What is a command shell and why would I use one?
+- How can I move around on my computer?
+- How can I see what files and directories I have?
+- How can I specify the location of a file or directory on my computer?
+
+### Objectives:
+- Describe key reasons for learning shell.
+- Navigate your file system using the command line.
+- Access and read help files for bash programs and use help files to identify useful command options.
+- Demonstrate the use of tab completion, and explain its advantages.
 
 
-### Having touble changing directories in terminal to your lab folder? Try:
-cd ~
-cd gen711
+### One common command that you will want to remember is 'print working directory'
+### 
+```  
+pwd
+>/Users/jeffreymiller/Desktop/gen711_lab
+```  
+
+### - If this doesn't end in 'gen711_lab', we need to help you navigate to the right place. 
+
+```  
+ls
+>lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data               shell_data.tar           shell_data.tar.bkup      workspace.code-workspace
+```  
+
+### - If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
+```  
+clear
+```  
+
+### - For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there, we can use:
+```  
+cd shell_data
+```  
+
+### - If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
+```  
+ls
+>sra_metadata  untrimmed_fastq
+```  
+
+### We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories
+```  
+ls -F
+>sra_metadata/  untrimmed_fastq/
+```  
+- Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file.
+- ls has lots of other options- they are also called flags. To find out what they are, we can type:
+
+```  
+man ls
+```  
+ - I dont use man. It is much quicker to google stuff. Show biostars and stackoverflow for doing the same thing
+
+### QUESTION1
+- Use the -l option for the ls command to display more information for each item in the directory. 
+- What is one piece of additional information this long format gives you that you don’t see with the bare ls command?
+### ANSWER 
+```  
+ls -l
+>total 8
+>drwxr-x--- 2 dcuser dcuser 4096 Jul 30  2015 sra_metadata
+>drwxr-xr-x 2 dcuser dcuser 4096 Nov 15  2017 untrimmed_fastq
+```  
+- The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.
+
+### Most commands take the options, which is a dash- followed by a letter. Or many letters for multiple options:
+```  
+ls -ltrh
+>total 184
+>-rw-r--r--@ 1 jeffreymiller  staff    42K Nov 15  2017 SRR098026.fastq
+>-rw-r--r--@ 1 jeffreymiller  staff    46K Nov 15  2017 SRR097977.fastq
+```  
+
+
+### Lets again change directories to work on our untrimmed_fastq sequences. Once you are in the untrimmed directory, what is in there?
+
+```  
+ls
+> sra_metadata    untrimmed_fastq
+cd untrimmed_fastq
+ls -F
+> SRR097977.fastq  SRR098026.fastq
+```  
+
+### The next command you'll memorize by using it a bunch is head. Head gives you a peek at the first few lines of a file. 
+
+```  
+head SRR097977.fastq
+
+>@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
++SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
+@SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
+NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
++SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
+!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
+@SRR098026.3 HWUSI-EAS1599_1:2:1:0:570 length=35
+NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
+```  
+
+## Shortcut: Tab Completion
+### It was time consuming to type that exactly. 
+- There is a handy feature called 'automatic tab completion'.
+- To use it, we hit tab to bring up the options on the file that terminal thinks you are going to use. So, if we hit tab once, we get 
+
+```  
+head S<tab>
+>head SRR09
+```  
+- then if we hit it once more, it is almost like running 'ls'
+```  
+head SRR09
+>SRR097977.fastq  SRR098026.fastq
+```  
+- this works for files- and thats what most use it for- but it also works for the commands
+- if we start typing 'pw<tab>' we get stuff that starts with that
+
+
+## The key points here are:
+- The shell gives you the ability to work more efficiently by using keyboard commands rather than a GUI.
+- Useful commands for navigating your file system include: ls, pwd, and cd.
+- Most commands take options (flags) which begin with a -.
+- Tab completion can reduce errors from mistyping and make work more efficient in the shell.
+
 
 
 # Navigating Files and Directories
@@ -31,218 +150,70 @@ cd gen711
 ### We have a special command to tell the computer to move us back or up one directory level. 
 - we use 'cd ..'
 ```  
-cd untrimmed_fastq
-ls
-```
-- then, lets do the exact opposite to go back to where we were
-```
 cd ../
 ls
 >sra_metadata    untrimmed_fastq
-
 ```  
-- Navigation seems pretty slow, if you have to type cd every time if your data is like ten folders deep.
-- Or the opposite is equally slow; navigating out one directory at a time with '../'
+
+- That seems pretty slow, if you have to type cd every time if your data is like ten folders deep.
 - lets go back into 'untrimmed_fastq' 
 ```  
 cd untrimmed_fastq
-pwd
-/home/unhAW/jtmiller/gen711/shell_data/untrimmed_fastq
 ```  
 - To navigate out two folders from here, we can double it up with 
 ```  
 cd ../../
 ls
->shell_data
+> lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data
 ```  
-- Use the tab to find out where you are and where you can go
-```
-cd ../<tab>
-cd ../../
-```
-
-### Navigate by multiple directories
-- Lets navigate to your home directory using '../'
-    - if you are in gen711_lab, navigate one folder out. 'cd ../'
-    - if you are in 'shell_data', navigate two folders out. 'cd ../../'
-    - if you are in 'untrimmed_fastq' or '.hidden', navigate three directories out with 'cd ../../'
-
-```  
-pwd 
->/home/unhAW/jtmiller
-```  
-
-### Tilde
-- Use the tilde shortcut to take you home. If you end up in the wrong directory, or something that you do not recognize, remember that the (~, green/yellow/esc)
-```  
-cd ~
-
-```  
-- The /, ~, and .. characters represent important navigational shortcuts.
-- Will be on the exam: 
-    - If the path starts with '/', it is an absolute path.
-    - If the path starts with '../' or a names of a directory, it is a relative path.
-
-- Relative paths specify the location starting from the current location, 
-- wWhile absolute paths specify a location from the root of the file system.
-
-### The / by itself, takes you all the way back to root.  
-There are two different ways to change directories into shell data. The relative path:  
-```
-cd gen711/shell_data
-```
-- *OR* the absolute path:
-```  
-cd /home/unhAW/jtmiller/gen711/shell_data
-```  
-
-- We have been navigating using relative paths
-- But you can use absolute paths anywhere, and they will get you there
-- Relative paths only work the directory that you want to navigate into is in your current working directory, or you can get there with '../'
-
-## Relative path
-```  
-cd untrimmed_fastq
-cd ../
-```  
-## Absolute
-```  
-cd /Users/jeffreymiller/Desktop/gen711_lab/shell_data/untrimmed_fastq
-```  
-
-## Pause for exercise 3a:
-- Now, from 'untrimmed_fastq', what are three ways to navigate to your home directory?
-
-
-
-
-# Working with Files and Directories
 
 ## Hidden files
-- Hidden files and directories start with . and can be viewed using ls -a.
 - Sometimes, its better to hide files from the command line. Like system files that shouldn't be messed with by the command line user.
 - Somewhere in 'shell_data' is a hidden file. 
 - Mention ls -aF and ls -Fa are the same, but case matters alot
 
-### We are interested in looking at the FASTQ files in this directory. We can list all files with the .fastq extension using the command:
-Questions
-    How can I create, copy and delete files and directories?
-    How can I control who has permission to modify a file?
-    How can I repeat recently used commands?
+### Navigate by multiple directories
+- if you are in gen711_lab, navigate one folder out. 'cd ../'
+```  
+pwd 
+>/Users/jeffreymiller/Desktop/gen711_lab
+```  
+- if you are in 'shell_data', navigate one folder out. 'cd ../../'
+- if you are in 'untrimmed_fastq' or '.hidden', navigate two out with 'cd ../../'
 
-Objectives
-    View, search within, copy, move, and rename files. Create new directories.
-    Use wildcards (*) to perform operations on multiple files.
-    Make a file read only.
-    Use the history command to view and repeat recently used commands.
+### The tilda shortcut takes you home
+- green yellow esc (~)
+```  
+cd ~
+cd Desktop/...
+```  
+- The /, ~, and .. characters represent important navigational shortcuts.
+- Hidden files and directories start with . and can be viewed using ls -a.
+- Relative paths specify a location starting from the current location, while absolute paths specify a location from the root of the file system.
 
-Now that we know how to navigate around our directory structure, let’s start working with our sequencing files. We did a sequencing experiment and have two results files, which are stored in our untrimmed_fastq directory.
+### The / by itself, takes you all the way back to root. 
 
-``` 
-cd ~/shell_data/untrimmed_fastq
-``` 
+- This is an absolute path:
+```  
+cd /Users/jeffreymiller/Desktop/gen711_lab/shell_data
+```  
 
-- Lets say that we did some grepping here and made a new text file for an analysis.
+- We have been navigating using relative paths
+- You can use absolute paths anywhere, and they will get you there
+- relative paths only work if you can see the folder that you want to be in
 
-```
-grep '@' SRR097977.fastq > textfile.txt
-ls
-```
-- The '>', or redirect command is directing the output to a file
-    - People get tripped up on this. It will be on the exam. 
-- We might have many files in here, but we are only interested in looking at the FASTQ files in this directory. 
-- We can list all files with the .fastq extension using the fastq part of the file, and something called a wildcard or glob:
+## Relative path
+```  
+untrimmed_fastq/
+```  
+## Absolute
+```  
+cd /Users/jeffreymiller/Desktop/gen711_lab/shell_data
+```  
 
-``` 
+# Working with Files and Directories
+
+ cd ~/shell_data/untrimmed_fastq
+
+
  ls *.fastq
- > SRR097977.fastq  SRR098026.fastq
-``` 
-
-The wildcard works with more than just the file extension name. Similar to the way the tab works by filling in as much as it can without making decisions for you. 
-
-``` 
- ls *977.fastq
- > SRR097977.fastq
-``` 
-
-- Just for fun, lets do this with an absolute path as well. You can use this to see files that match in far directories too.
-
-```
-ls /Users/jeffreymiller/Desktop/gen711_lab/shell_data/untrimmed_fastq/*fastq
-```
-
-## Pause for exercise 3b
-1. Do each of the following tasks from your current directory using a single ls command for each:
-    - List all of the files in /Applications that start with the letter ‘c’.
-    - List all of the files in /Applications that contain the letter ‘a’.
-    - List all of the files in /Applications that end with the letter ‘o’.
-    - Bonus: List all of the files in /Applications that contain the letter ‘a’ or the letter ‘c’.
-
-
-# COMMAND HISTORY
-
-- If you want to repeat a command that you’ve run recently, you can access previous commands using the up arrow on your keyboard to go back to the most recent command. This is helpful if you deleted something you needed. Lets intentionally remove our readinfo.txt, but then remake it from our history.
-
-- Likewise, the down arrow takes you forward in the command history.
-
-- A third way is to use the command 'history'
-
-### To cancel something that wont run:
-- ctrl + c (cancel command when stuck)
-- ctrl + r (find in your command history)
-- ctrl + L (clear)
-
-Extra time: 'echo' is a built-in shell command that writes its arguments, like a line of text to standard output. The 'echo' command can also be used with pattern matching characters, such as wildcard characters. Here we will use the echo command to see how the wildcard character is interpreted by the shell.  What does echo say when you try to match something that is not there? What about ls?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## ANSWERS 
-1. 
-ls /usr/bin/c*
-ls /usr/bin/*a*
-ls /usr/bin/*o
-Bonus: ls /usr/bin/*[ac]*
-
-2. 
-echo *.fastq
-> SRR097977.fastq SRR098026.fastq
-echo *.missing
-ls *.missing
-
-
-
-
-cd ~/shell_data/untrimmed_fastq
-
-grep NNNNNNNNNN SRR098026.fastq
-
-grep -B1 -A2 NNNNNNNNNN SRR098026.fastq
-
-
-### Exercise
-Search for the sequence GNATNACCACTTCC in the SRR098026.fastq file. Have your search return all matching lines and the name (or identifier) for each sequence that contains a match.
-Search for the sequence AAGTT in both FASTQ files. Have your search return all matching lines and the name (or identifier) for each sequence that contains a match.

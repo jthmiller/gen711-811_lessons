@@ -1,219 +1,81 @@
+## Lab 2 (1/30/26)
 
-## Lesson 1 START Lab 2
+## Start this lab once you have access to RON through VScode
 
-### Questions:
-- What is a command shell and why would I use one?
-- How can I move around on my computer?
-- How can I see what files and directories I have?
-- How can I specify the location of a file or directory on my computer?
+### Make repository on GitHub for your lab notebook on RON and your local computer
+Now that you are connected to RON, lets make a lab notebook in your repo to be graded each week. The easiest way to do this is to first create a new repository on GitHub.com, and then clone that to your home directory on RON and your laptop.
+1. Login to GitHub with the credentials you made for Lab 1
+2. On your GitHub page, click 'Repositories' 
+3. Click the green 'New' button
+4. In 'Repository Name', type 'Bioinformatics-Notes'  **No spaces. Lets all keep the same simple name**
+5. Flip the switch to 'on' for the 'Add README'
+6. Click 'Create repository'
 
-### Objectives:
-- Describe key reasons for learning shell.
-- Navigate your file system using the command line.
-- Access and read help files for bash programs and use help files to identify useful command options.
-- Demonstrate the use of tab completion, and explain its advantages.
+### Next, we will clone the repo on RON, and open up the folder with VScode (using the Remote SSH extension)
+1. Open up vscode
+2. Control + shift + 'p' to open command prompt (command + shift + p on apple)
+3. Start typing 'Connect to...' and the 'Connect current window to host' menu item will pop up. Select it
+4. If asked, connect to ron.sr.edu host
+5. Enter your RON username if prompted
+6. Enter your RON password when prompted
+7. Once you are successfully connected to RON and in your home directory, clone with the 'git clone' command:
+```
+cd $HOME
+git clone https://github.com/<YOURGITHUBUSERNAME>/Bioinformatics-Notes.git
+```
+You should see an indication that it downloaded ok. 
 
+### Next, we will open the directory you cloned in VScode to save the workspace and make a lab notebook that should be the same on RON and your machine.
+1. In the VScode window that you have connected to RON, go to 'File --> Open folder'
+2. The command pallet in VScode should show your 'home directories' including the 'Bioinformatics-Notes' directory. Select it.  
+3. If you did this correctly, you should now see the README file pop up on the left in the list of files. Click on it to open it. 
+4. While we are at it, lets save your VScode workspace in the repo directory. Click 'File --> Save Workspace As...' and click on the 'Bioinformatics-Notes' directory to save the workspace there. The workspace file just lists your VScode preferences.This way, you can load this workspace each week to pick up where you left off.   
+5. In vscode terminal, go to 'file' --> 'new text file'. Save this empty file as 'yourlastname_yourfirstname.md'. Keep notes in this file as demonstrated by your instructor to get full attendance points. Add some short random text to this document to make sure that it is picked up. 
+6. If you've done everything above correctly, new documents and changes should be tracked VScode and Git. To get your changes incorporated into your repository at GitHub, click on the github bubble fork (usually the third icon down on the left of VScode). Enter any random text you want into the 'Message' box, and then hit the commit button. This should upload your new files/changes to your GitHub repo. 
 
-### One common command that you will want to remember is 'print working directory'
-### 
-```  
-pwd
->/Users/jeffreymiller/Desktop/gen711_lab
-```  
+Note: Text files saved with the '.md' after it will be interpreted at 'markdown' format. We will get into this soon. 
 
-### - If this doesn't end in 'gen711_lab', we need to help you navigate to the right place. 
+**Generate ssh-keys to log into RON without usernames and passwords**  
 
-```  
-ls
->lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data               shell_data.tar           shell_data.tar.bkup      workspace.code-workspace
-```  
+First, open 'terminal' on your mac. We are going to use the terminal to generate the keys and restrict the permissions on the private key file. For macOS / Linux, run the following shell command, replacing the path to your private key if necessary:
+```
+cd ~/.ssh
+ssh-keygen -t ed25519 -b 4096
+chmod 400 ~/.ssh/id_ed25519
+```
+<br>
 
-### - If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
-```  
-clear
-```  
+- Next, share the public key with the Ron server
+```
+ssh-copy-id USERNAME@ron.sr.unh.edu
+```
+If that doesn't work, we can try:
+```
+cat ~/.ssh/id_rsa.pub | ssh user@12.34.56.78 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys
+```
+</details> <!-- end for mac-->
+<br>
+ <details><summary>For Windows</summary> 
 
-### - For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there, we can use:
-```  
-cd shell_data
-```  
+**For Windows**, run the following command in PowerShell to grant explicit read access to your username:
+```
+icacls "privateKeyPath" /grant :R
+```
+Then navigate to the private key file in Windows Explorer, right-click and select Properties. Select the Security tab → Advanced → Disable inheritance → Remove all inherited permissions from this object.
 
-### - If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
-```  
-ls
->sra_metadata  untrimmed_fastq
-```  
+<br>
 
-### We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories
-```  
-ls -F
->sra_metadata/  untrimmed_fastq/
-```  
-- Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file.
-- ls has lots of other options- they are also called flags. To find out what they are, we can type:
+### Next Week
 
-```  
-man ls
-```  
- - I dont use man. It is much quicker to google stuff. Show biostars and stackoverflow for doing the same thing
-
-### QUESTION1
-- Use the -l option for the ls command to display more information for each item in the directory. 
-- What is one piece of additional information this long format gives you that you don’t see with the bare ls command?
-### ANSWER 
-```  
-ls -l
->total 8
->drwxr-x--- 2 dcuser dcuser 4096 Jul 30  2015 sra_metadata
->drwxr-xr-x 2 dcuser dcuser 4096 Nov 15  2017 untrimmed_fastq
-```  
-- The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.
-
-### Most commands take the options, which is a dash- followed by a letter. Or many letters for multiple options:
-```  
-ls -ltrh
->total 184
->-rw-r--r--@ 1 jeffreymiller  staff    42K Nov 15  2017 SRR098026.fastq
->-rw-r--r--@ 1 jeffreymiller  staff    46K Nov 15  2017 SRR097977.fastq
-```  
-
-
-### Lets again change directories to work on our untrimmed_fastq sequences. Once you are in the untrimmed directory, what is in there?
-
-```  
-ls
-> sra_metadata    untrimmed_fastq
-cd untrimmed_fastq
-ls -F
-> SRR097977.fastq  SRR098026.fastq
-```  
-
-### The next command you'll memorize by using it a bunch is head. Head gives you a peek at the first few lines of a file. 
-
-```  
-head SRR097977.fastq
-
->@SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-NNNNNNNNNNNNNNNNCNNNNNNNNNNNNNNNNNN
-+SRR098026.1 HWUSI-EAS1599_1:2:1:0:968 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
-+SRR098026.2 HWUSI-EAS1599_1:2:1:0:312 length=35
-!!!!!!!!!!!!!!!!#!!!!!!!!!!!!!!!!!!
-@SRR098026.3 HWUSI-EAS1599_1:2:1:0:570 length=35
-NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
-```  
-
-## Shortcut: Tab Completion
-### It was time consuming to type that exactly. 
-- There is a handy feature called 'automatic tab completion'.
-- To use it, we hit tab to bring up the options on the file that terminal thinks you are going to use. So, if we hit tab once, we get 
-
-```  
-head S<tab>
->head SRR09
-```  
-- then if we hit it once more, it is almost like running 'ls'
-```  
-head SRR09
->SRR097977.fastq  SRR098026.fastq
-```  
-- this works for files- and thats what most use it for- but it also works for the commands
-- if we start typing 'pw<tab>' we get stuff that starts with that
-
-
-## The key points here are:
-- The shell gives you the ability to work more efficiently by using keyboard commands rather than a GUI.
-- Useful commands for navigating your file system include: ls, pwd, and cd.
-- Most commands take options (flags) which begin with a -.
-- Tab completion can reduce errors from mistyping and make work more efficient in the shell.
-
-
-
-# Navigating Files and Directories
-- How can I perform operations on files outside of my working directory?
-- What are some navigational shortcuts I can use to make my work more efficient?
-
-## Objectives:
-- Use a single command to navigate multiple steps in your directory structure, including moving backwards (one level up).
-- Perform operations on files in directories outside your working directory.
-- Work with hidden directories and hidden files.
-- Interconvert between absolute and relative paths.
-- Employ navigational shortcuts to move around your file system.
-
-## More navigation
-- We got an idea for moving around using cd and the name of the folder to move into. 
-- But how to we go back out? We dont see the folder we are in.
-- We have a special command to tell the computer to move us back or up one directory level.
-
-### We have a special command to tell the computer to move us back or up one directory level. 
-- we use 'cd ..'
-```  
-cd ../
-ls
->sra_metadata    untrimmed_fastq
-```  
-
-- That seems pretty slow, if you have to type cd every time if your data is like ten folders deep.
-- lets go back into 'untrimmed_fastq' 
-```  
-cd untrimmed_fastq
-```  
-- To navigate out two folders from here, we can double it up with 
-```  
-cd ../../
-ls
-> lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data
-```  
-
-## Hidden files
-- Sometimes, its better to hide files from the command line. Like system files that shouldn't be messed with by the command line user.
-- Somewhere in 'shell_data' is a hidden file. 
-- Mention ls -aF and ls -Fa are the same, but case matters alot
-
-### Navigate by multiple directories
-- if you are in gen711_lab, navigate one folder out. 'cd ../'
-```  
-pwd 
->/Users/jeffreymiller/Desktop/gen711_lab
-```  
-- if you are in 'shell_data', navigate one folder out. 'cd ../../'
-- if you are in 'untrimmed_fastq' or '.hidden', navigate two out with 'cd ../../'
-
-### The tilda shortcut takes you home
-- green yellow esc (~)
-```  
-cd ~
-cd Desktop/...
-```  
-- The /, ~, and .. characters represent important navigational shortcuts.
-- Hidden files and directories start with . and can be viewed using ls -a.
-- Relative paths specify a location starting from the current location, while absolute paths specify a location from the root of the file system.
-
-### The / by itself, takes you all the way back to root. 
-
-- This is an absolute path:
-```  
-cd /Users/jeffreymiller/Desktop/gen711_lab/shell_data
-```  
-
-- We have been navigating using relative paths
-- You can use absolute paths anywhere, and they will get you there
-- relative paths only work if you can see the folder that you want to be in
-
-## Relative path
-```  
-untrimmed_fastq/
-```  
-## Absolute
-```  
-cd /Users/jeffreymiller/Desktop/gen711_lab/shell_data
-```  
-
-# Working with Files and Directories
-
- cd ~/shell_data/untrimmed_fastq
-
-
- ls *.fastq
+To get new course files added to your repository later, you will need to add the original repository (the one you forked) as a 'remote' [see here for help](https://stackoverflow.com/questions/3903817/pull-new-updates-from-original-github-repository-into-forked-github-repository),[and here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)  
+To add updates from the gen711-811 repo:
+```
+cd gen711-811
+git remote add upstream https://github.com/jthmiller/gen711-811.git
+git fetch upstream
+git merge upstream/master master
+```
+Note, git merge is like "git pull" which is fetch + merge. Or, better, you can replay your local work on top of the fetched branch like a "git pull --rebase"
+```
+git rebase upstream/master
+```
