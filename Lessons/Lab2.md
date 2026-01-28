@@ -14,12 +14,20 @@
 - Demonstrate the use of tab completion, and explain its advantages.
 
 
+
+### Before you start this experience, make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
+```
+cd $HOME
+```
+
 ### One common command that you will want to remember is 'print working directory'
 ### 
 ```  
 pwd
->/Users/jeffreymiller/Desktop/gen711_lab
+>/home/users/jtm1171
 ```  
+
+### Use the 'cd' command to 'change directories' into 
 
 ### - If this doesn't end in 'gen711_lab', we need to help you navigate to the right place. 
 

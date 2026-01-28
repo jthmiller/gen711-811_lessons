@@ -1,4 +1,4 @@
-# Lab 2 (First in person)
+# Lab 1 (Take home lab)
 
 ## SSH into RON
 <!-- is this still true? -->
