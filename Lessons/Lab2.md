@@ -37,6 +37,22 @@ Note: Text files saved with the '.md' after it will be interpreted at 'markdown'
 
 **Generate ssh-keys to log into RON without usernames and passwords**  
 
+### Before you start this experience, make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
+```
+cd $HOME
+```
+
+### One common command that you will want to remember is 'print working directory'
+### 
+```  
+pwd
+>/home/users/jtm1171
+```  
+
+### Use the 'cd' command to 'change directories' into 
+
+### - If this doesn't end in 'gen711_lab', we need to help you navigate to the right place. 
+
 First, open 'terminal' on your mac. We are going to use the terminal to generate the keys and restrict the permissions on the private key file. For macOS / Linux, run the following shell command, replacing the path to your private key if necessary:
 ```
 cd ~/.ssh
