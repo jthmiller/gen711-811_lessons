@@ -1,11 +1,12 @@
 
-## Lesson 1 START Lab 2
+## Lab 3 (after lab 2 completed)
 
+### Start lesson
 ### Questions:
 - What is a command shell and why would I use one?
-- How can I move around on my computer?
+- How can I move around on RON?
 - How can I see what files and directories I have?
-- How can I specify the location of a file or directory on my computer?
+- How can I specify the location of a file or directory on RON?
 
 ### Objectives:
 - Describe key reasons for learning shell.
@@ -13,24 +14,31 @@
 - Access and read help files for bash programs and use help files to identify useful command options.
 - Demonstrate the use of tab completion, and explain its advantages.
 
-
-
-### Before you start this experience, make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
+### Before you start this experience, make sure you are starting in your home directory on RON. type this into the VScode terminal that is connected to RON
 ```
 cd $HOME
 ```
-
-### One common command that you will want to remember is 'print working directory'
-### 
+## pwd
+### Your first command to remember is 'print working directory', or 'pwd'
+The output of this command prints some text back to our terminal. This is indicating where in the file system of RON. You can think of these as folders, but we'll be calling them 'directories' from now on. 
 ```  
 pwd
 >/home/users/jtm1171
 ```  
+In the 'home' directory, there is a 'users' directory that contains a directory named the same as my username. This is the directory of my stuff on RON, such as the two repos that I have. So it will be very important to be able to check which directory you are currently working in- and then understanding how to change your working directory.   
 
-### Use the 'cd' command to 'change directories' into 
-
-### - If this doesn't end in 'gen711_lab', we need to help you navigate to the right place. 
-
+## cd
+### We do that with the 'cd' command, or 'change directories'  
+```  
+cd gen711-811
+```
+If this didn't run, you might not be in the right directory. Try this again:
+```
+cd $HOME
+cd gen711-811
+```
+## ls
+### The next useful command is 'ls' or list all of the files and directories in my current working directory
 ```  
 ls
 >lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data               shell_data.tar           shell_data.tar.bkup      workspace.code-workspace
