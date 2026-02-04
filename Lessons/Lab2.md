@@ -13,9 +13,9 @@
 - Access and read help files for bash programs and use help files to identify useful command options.
 - Demonstrate the use of tab completion, and explain its advantages.
 
-
-
-### Before you start this experience, make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
+### Before you start this lab:
+1. Fetch any updates to gen711-811
+2. Make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
 ```
 cd $HOME
 ```
