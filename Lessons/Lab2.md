@@ -1,12 +1,11 @@
 
-## Lab 3 (after lab 2 completed)
+## Lesson 1 START Lab 2
 
-### Start lesson
 ### Questions:
 - What is a command shell and why would I use one?
-- How can I move around on RON?
+- How can I move around on my computer?
 - How can I see what files and directories I have?
-- How can I specify the location of a file or directory on RON?
+- How can I specify the location of a file or directory on my computer?
 
 ### Objectives:
 - Describe key reasons for learning shell.
@@ -14,7 +13,9 @@
 - Access and read help files for bash programs and use help files to identify useful command options.
 - Demonstrate the use of tab completion, and explain its advantages.
 
-### Before you start this experience, make sure you are starting in your home directory on RON. type this into the VScode terminal that is connected to RON
+
+
+### Before you start this experience, make sure you are starting in your home directory on RON. If this means nothing to you, simple copy and paste this line into the VScode terminal that is connected to RON
 ```
 cd $HOME
 ```
