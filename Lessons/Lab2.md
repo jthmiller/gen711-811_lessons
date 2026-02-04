@@ -50,44 +50,44 @@ ls
 clear
 ```  
 
-### For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there, we can use:
+### For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there. We can also use tab-completion to see what is there. Hit tab with your pinky a couple times in a row to see what my options are.
 ```  
 cd shell_data
 ```  
 
 ## man
-### If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
+If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
 ```  
 ls
 >sra_metadata  untrimmed_fastq
 ```  
 
-### We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories
+We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories
+
 ```  
 ls -F
 >sra_metadata/  untrimmed_fastq/
 ```  
-- Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file.
-- ls has lots of other options- they are also called flags. To find out what they are, we can type:
+Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file. ls has lots of other options- they are also called flags. To find out what they are, we can type:
 
 ```  
 man ls
 ```  
- - I dont use man. It is much quicker to google stuff. Show biostars and stackoverflow for doing the same thing
+ I dont use man. At this stage in your learning, it is much quicker to google stuff. Biostars and stackoverflow for doing the same thing, and does so in human friendly way
 
-### QUESTION1
+## QUESTION1
 - Use the -l option for the ls command to display more information for each item in the directory. 
 - What is one piece of additional information this long format gives you that you don’t see with the bare ls command?
-### ANSWER 
+## ANSWER 
 ```  
 ls -l
 >total 8
 >drwxr-x--- 2 dcuser dcuser 4096 Jul 30  2015 sra_metadata
 >drwxr-xr-x 2 dcuser dcuser 4096 Nov 15  2017 untrimmed_fastq
 ```  
-- The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.
+The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.
 
-### Most commands take the options, which is a dash- followed by a letter. Or many letters for multiple options:
+Most commands take the options, which is a dash- followed by a letter. Or many letters for multiple options:
 ```  
 ls -ltrh
 >total 184
@@ -95,8 +95,7 @@ ls -ltrh
 >-rw-r--r--@ 1 jeffreymiller  staff    46K Nov 15  2017 SRR097977.fastq
 ```  
 
-
-### Lets again change directories to work on our untrimmed_fastq sequences. Once you are in the untrimmed directory, what is in there?
+Lets again change directories to work on our untrimmed_fastq sequences. Once you are in the untrimmed directory, what is in there?
 
 ```  
 ls
@@ -106,7 +105,8 @@ ls -F
 > SRR097977.fastq  SRR098026.fastq
 ```  
 
-### The next command you'll memorize by using it a bunch is head. Head gives you a peek at the first few lines of a file. 
+## head
+The next command you'll memorize by using it a bunch is head. Head gives you a peek at the first few lines of a file. 
 
 ```  
 head SRR097977.fastq
