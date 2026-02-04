@@ -152,14 +152,16 @@ head SRR09
 - this works for files- and thats what most use it for- but it also works for the commands
 - if we start typing 'pw<tab>' we get stuff that starts with that
 
-
 ## The key points here are:
 - The shell gives you the ability to work more efficiently by using keyboard commands rather than a GUI.
 - Useful commands for navigating your file system include: ls, pwd, and cd.
 - Most commands take options (flags) which begin with a -.
 - Tab completion can reduce errors from mistyping and make work more efficient in the shell.
 
-# Navigating Files and Directories
+
+# Part 2
+
+## Navigating Files and Directories
 - How can I perform operations on files outside of my working directory?
 - What are some navigational shortcuts I can use to make my work more efficient?
 
@@ -175,8 +177,8 @@ head SRR09
 - But how to we go back out? We dont see the folder we are in.
 - We have a special command to tell the computer to move us back or up one directory level.
 
-### We have a special command to tell the computer to move us back or up one directory level. 
-- we use 'cd ..'
+## move up one directory
+We have a special shortcut to tell the computer to move us back or up one directory level. We use 'cd ..'
 ```  
 cd ../
 ls
@@ -196,12 +198,15 @@ ls
 ```  
 
 ## Hidden files
-- Sometimes, its better to hide files from the command line. Like system files that shouldn't be messed with by the command line user.
-- Somewhere in 'shell_data' is a hidden file. 
-- Mention ls -aF and ls -Fa are the same, but case matters alot
+Sometimes, its better to hide files from the command line. Like system files that shouldn't be messed with by the command line user.
+
+Somewhere in 'shell_data' is a hidden file. 
+
+Mention ls -aF and ls -Fa are the same, but case matters alot
 
 ### Navigate by multiple directories
-- if you are in gen711_lab, navigate one folder out. 'cd ../'
+If you are in gen711_lab, navigate one folder out. 'cd ../'
+
 ```  
 pwd 
 >/Users/jeffreymiller/Desktop/gen711_lab
