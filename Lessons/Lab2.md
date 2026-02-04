@@ -20,55 +20,68 @@
 cd $HOME
 ```
 ## pwd
-### Your first command to remember is 'print working directory', or 'pwd'
+Your first command to remember is 'print working directory', or 'pwd'
+
 The output of this command prints some text back to our terminal. This is indicating where in the file system of RON. You can think of these as folders, but we'll be calling them 'directories' from now on. 
+
 ```  
 pwd
 >/home/users/jtm1171
 ```  
-In the 'home' directory, there is a 'users' directory that contains a directory named the same as my username. This is the directory of my stuff on RON, such as the two repos that I have. So it will be very important to be able to check which directory you are currently working in- and then understanding how to change your working directory.   
 
-## cd
-### We do that with the 'cd' command, or 'change directories'  
+In the 'home' directory, there is a 'users' directory that contains a directory named the same as my username. This is the directory of my stuff on RON, such as the two repos that I have. So it will be very important to be able to check which directory you are currently working in- and then understanding how to change your working directory. We do that with the 'cd' command, or 'change directories'   
+
+## cd 
 ```  
 cd gen711-811
 ```
+
 If this didn't run, you might not be in the right directory. Try this again:
+
 ```
 cd $HOME
 cd gen711-811
 ```
+
 ## ls
-### The next useful command is 'ls' or list all of the files and directories in my current working directory
+The next useful command is 'ls' or list all of the files and directories in my current working directory
+
 ```  
 ls
 >lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data               shell_data.tar           shell_data.tar.bkup      workspace.code-workspace
 ```  
 
-### If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
+## Clear
+If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
+
 ```  
 clear
 ```  
 
-### For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there. We can also use tab-completion to see what is there. Hit tab with your pinky a couple times in a row to see what my options are.
+## Shell Data
+For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there. We can also use tab-completion to see what is there. Hit tab with your pinky a couple times in a row to see what my options are.
+
 ```  
 cd shell_data
 ```  
 
-## man
-If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
+## Command options
+We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories. Without the option, we don't know which are files, and which are directories to move into. 
+
 ```  
 ls
 >sra_metadata  untrimmed_fastq
 ```  
 
-We can make the ls output more comprehensible by using the flag -F, which tells ls to add a trailing / to the names of directories
+Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file. 
 
 ```  
 ls -F
 >sra_metadata/  untrimmed_fastq/
 ```  
-Anything with a “/” after it is a directory. Things with a “*” after them are programs. If there are no decorations, it’s a file. ls has lots of other options- they are also called flags. To find out what they are, we can type:
+
+## man
+ls has lots of other options- they are also called flags. To find out what they are, we can type:
 
 ```  
 man ls
