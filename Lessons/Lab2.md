@@ -1,13 +1,13 @@
 
-## Lesson 1 START Lab 2
+# Lesson 1, Lab 3 (2/6/26)
 
-### Questions:
+## Questions:
 - What is a command shell and why would I use one?
 - How can I move around on my computer?
 - How can I see what files and directories I have?
 - How can I specify the location of a file or directory on my computer?
 
-### Objectives:
+## Objectives:
 - Describe key reasons for learning shell.
 - Navigate your file system using the command line.
 - Access and read help files for bash programs and use help files to identify useful command options.
@@ -45,17 +45,18 @@ ls
 >lab1_notes.md            lab1_notes.sh            pre-lab-instructions.md  shell_data               shell_data.tar           shell_data.tar.bkup      workspace.code-workspace
 ```  
 
-### - If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
+### If your terminal gets messy, and you do not want to look at the stuff you just ran, use 'clear'
 ```  
 clear
 ```  
 
-### - For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there, we can use:
+### For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there, we can use:
 ```  
 cd shell_data
 ```  
 
-### - If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
+## man
+### If the folder downloaded and extracted correctly, and you run 'ls' again from inside the shell_data directory, you should see this
 ```  
 ls
 >sra_metadata  untrimmed_fastq
