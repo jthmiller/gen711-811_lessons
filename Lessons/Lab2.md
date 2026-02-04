@@ -58,7 +58,7 @@ If your terminal gets messy, and you do not want to look at the stuff you just r
 clear
 ```  
 
-## Shell Data
+## tab-completion
 For the lab, we are going to work on the files that we downloaded from canvas. We want to navigate into the 'shell_data' folder (or directory). If the 'ls' from above told you that the folder is there. We can also use tab-completion to see what is there. Hit tab with your pinky a couple times in a row to see what my options are.
 
 ```  
@@ -137,7 +137,6 @@ NNNNNNNNNNNNNNNNANNNNNNNNNNNNNNNNNN
 ```  
 
 ## Shortcut: Tab Completion
-### It was time consuming to type that exactly. 
 - There is a handy feature called 'automatic tab completion'.
 - To use it, we hit tab to bring up the options on the file that terminal thinks you are going to use. So, if we hit tab once, we get 
 
@@ -159,8 +158,6 @@ head SRR09
 - Useful commands for navigating your file system include: ls, pwd, and cd.
 - Most commands take options (flags) which begin with a -.
 - Tab completion can reduce errors from mistyping and make work more efficient in the shell.
-
-
 
 # Navigating Files and Directories
 - How can I perform operations on files outside of my working directory?
