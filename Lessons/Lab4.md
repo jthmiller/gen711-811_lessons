@@ -1,10 +1,13 @@
 ---
+title: "Lab 5"
+author: "Jeffrey Miller"
+date: "2026 Feb 20"
 output: pdf_document
 ---
 
 ## Today:
-- Navigating Files and Directories (review and new)
-- Practice practical question
+- References
+- Inverse grep
 
 
 ### Having touble changing directories in terminal to your lab folder? Try:
