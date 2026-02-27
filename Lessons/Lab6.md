@@ -118,7 +118,8 @@ CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 2. Search for the sequence `AAGTT` in both FASTQ files.
   Have your search retrn all matching lines and the name (or identifier) for each sequence
-  that contains a match:::::  solution
+  that contains a match
+    solution
 
 ## Solution
 
@@ -154,7 +155,9 @@ SRR097977.fastq-@SRR097977.238 209DTAAXX_Lenski2_1_7:8:3:592:919 length=36
 SRR097977.fastq:TTCTTACCATCCTGAAGTTTTTTCATCTTCCCTGAT
 --
 SRR098026.fastq-@SRR098026.158 HWUSI-EAS1599_1:2:1:1:1505 lngth=35
-SRR098026.fastq:GNNNNNNNNCAAAGTTGATCNNNNNNNNNTGTGCG``:::::
+SRR098026.fastq:GNNNNNNNNCAAAGTTGATCNNNNNNNNNTGTGCG
+```
+
 
 
 
@@ -180,8 +183,6 @@ in our FASTQ files that contain
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
 ```
 
-
-
 ## File extensions
 
 You might be confused about why we're naming our output file with a `.txt` extension. After all,
@@ -190,7 +191,6 @@ also be a FASTQ file? The answer is, yes - it will be a FASTQ file and it would 
 name it with a `.fastq` extension. However, using a `.fastq` extension will lead us to problems
 when we move to using wildcards later in this episode. We'll point out where this becomes
 important. For now, it's good that you're thinking about fileextensions!
-
 
 
 The prompt should sit there a little bit, and then it should look like nothing
@@ -204,10 +204,7 @@ make sure your file matches your instructor's output.
 As of Sept. 2020, wc gives the following output:
 
 ```bash
-$ wc bad_reads.txt
-```
-
-```output
+wc bad_reads.txt
   802    1338   24012 bad_reads.txt
 ```
 
@@ -215,15 +212,13 @@ This will tell us the number of lines, words and characters in the file. If we
 want only the number of lines, we can use the `-l` flag for `lines`.
 
 ```bash
-$ wc -l bad_reads.txt
+wc -l bad_reads.txt
+802 bad_reads.txt
 ```
 
-``output
-802 bad_reads.txt
-``:::::::::  challenge
-
 ## Exercise 3 2
-How many sequences are there in `SRR098026.fastq`? Remember that every sequence is formed by four lines:::::  solution
+How many sequences are there in `SRR098026.fastq`? Remember that every sequence is formed by four lines
+  solution
 
 ## Solution
 
@@ -247,16 +242,16 @@ Note, this will do integer division - if you need floating point arithmetic you 
 
 
 ```bash
-$ echo "996/4" | bc
+echo "996/4" | bc
 ```
 
-``output
-249``:::::
-
-:::::::::  challenge
+```output
+249
+```
 
 ## Exercise 4 3
-How many sequences in `SRR098026.fastq` contain at least 3 consecutive Ns:::::  solution
+How many sequences in `SRR098026.fastq` contain at least 3 consecutive Ns
+  solution
 
 ## Solution
 
@@ -265,8 +260,10 @@ $ grep NNN SRR098026.fastq > bad_reads.txt
 $ wc -l bad_reads.txt
 ```
 
-``output
-249``:::::
+```output
+249
+```
+
 
 
 
@@ -574,10 +571,10 @@ $ for filename in *.fastq
 > name=$(basename ${filename} .fastq)
 >echo ${name}
 > done
-``:::::::::  challenge
+```
 
 ## Exercise 4
-Print the file prefix of all of the `.txt` files in our current directory:::::  solution
+Print the file prefix of all of the `.txt` files in our current directory
 
 ## Solution
 
@@ -586,7 +583,9 @@ $ for filename in *.txt
 > do
 > name=$(basename ${filename} .txt)
 >echo ${name}
-> done``:::::
+> done
+```
+
 
 
 
@@ -598,11 +597,11 @@ $ for filename in *.txt
 > name=$(basename ${filename} .txt)
 >mv ${filename}  ${name}_2019.txt
 > done
-``:::::::::  challenge
+```
 
 ## Exercise 
 
-Remove `_2019` from all of the `.txt` files:::::  solution
+Remove `_2019` from all of the `.txt` files
 
 ## Solution
 
@@ -611,7 +610,8 @@ $ for filename in *_2019.txt
 > do
 > name=$(basename ${filename} _2019.txt)
 >mv ${filename} ${name}.txt
-> done``:::::
+> done``
+
 
 
 
