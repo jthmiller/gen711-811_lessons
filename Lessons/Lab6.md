@@ -2,7 +2,6 @@
 title: "Lab 6"
 author: "Jeffrey Miller"
 date: "2026 Feb 27"
-output: pdf_document
 ---
 
 
@@ -65,7 +64,7 @@ Let's give it a try!
 The four nucleotides that appear in DNA are abbreviated `A`, `C`, `T` and `G`.
 Unknown nucleotides are represented with the letter `N`. An `N` appearing
 in a sequencing file represents a position where the sequencing machine was not able to
-confidently determine the nucleotide in that position. You can think of an `N` as being aNy
+confidently determine the nucleotide in that position. You can think of an `N` as being any
 nucleotide at that position in the DNA sequence.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
