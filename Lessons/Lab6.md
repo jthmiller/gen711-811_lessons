@@ -5,46 +5,27 @@ date: "2026 Feb 27"
 ---
 
 
-:::::::::::::::::::::::::::::::::::::::: review
-
+### review
 which for base and conda env
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-Then, we will use less to look a the summary
+Use less to look a the summary
 ```
 less SRR2584863_1_fastqc/summary.txt
 ```
 
 Lastly, lets try to download one of those html files to our computer using vscode's remote explorer. Then, we can open it in our web browser and see the interactive report that FastQC generates.
 
-
-Q: Which samples failed at least one of FastQC’s quality tests? What test(s) did those samples fail?
+Or, we can use the summary files. What test(s) did those samples fail?
 ```
-cat */summary.txt > ~/dc_workshop/docs/fastqc_summaries.txt
+cat */summary.txt > ../fastqc_summaries.txt
 ```
 
-### Start this lesson
-https://github.com/datacarpentry/shell-genomics/blob/main/episodes/04-redirection.md
+### Lesson
 
-
-
-
-::::::::::::::::::::::::::::::::::::::: objectives
-
-- Employ the `grep` command to search for information within files.
+- Review the `grep` command to search for information within files.
 - Print the results of a command to a file.
 - Construct command pipelines with two or more stages.
-- Use `for` loops to run the same command for several input files.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::: questions
-
-- How can I search within files?
-- How can I combine existing commands to do new things?
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+- Use `for` loops to run the same command for several inputfiles.
 
 ## Searching files
 
@@ -57,23 +38,20 @@ regular expressions in this lesson, and are instead going to specify the strings
 we are searching for.
 Let's give it a try!
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
 ## Nucleotide abbreviations
 
 The four nucleotides that appear in DNA are abbreviated `A`, `C`, `T` and `G`.
 Unknown nucleotides are represented with the letter `N`. An `N` appearing
 in a sequencing file represents a position where the sequencing machine was not able to
-confidently determine the nucleotide in that position. You can think of an `N` as being any
-nucleotide at that position in the DNA sequence.
+confidently determine the nucleotide in that position. You can think of an `N` as being anynucleotide at that position in the DNA sequence.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 We'll search for strings inside of our fastq files. Let's first make sure we are in the correct
 directory:
 
 ```bash
-$ cd ~/shell_data/untrimmed_fastq
+$ cd ~/gen711-811/shell_data/untrimmed_fastq
 ```
 
 Let's look for lines that contain `ACGT`.
@@ -89,20 +67,16 @@ This is useful if you are unsure about the number of lines that will be found.
 $ grep -c ACGT SRR098026.fastq
 ```
 
-Suppose we want to see how many reads in our file have really bad segments containing 10 consecutive unknown nucleotides (Ns).
-
-:::::::::::::::::::::::::::::::::::::::::  callout
 
 ## Determining quality
 
-In this lesson, we're going to be manually searching for strings of `N`s within our sequence
+Suppose we want to see how many reads in our file have really bad segments containing 10 consecutive unknown nucleotides (Ns). We're going to be manually searching for strings of `N`s within our sequence
 results to illustrate some principles of file searching. It can be really useful to do this
 type of searching to get a feel for the quality of your sequencing results, however, in your
 research you will most likely use a bioinformatics tool that has a built-in program for
 filtering out low-quality reads. You'll learn how to use one such tool in
-[a later lesson](https://datacarpentry.org/wrangling-genomics/02-quality-control).
+[a later lesson](https://datacarpentry.org/wrangling-genomics02-quality-control).
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Let's search for the string NNNNNNNNNN in the SRR098026 file:
 
@@ -132,23 +106,19 @@ One of the sets of lines returned by this command is:
 ```output
 @SRR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
 CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-+SRR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
++RR098026.177 HWUSI-EAS1599_1:2:1:1:2025 length=35
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ```
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
+## Exercise 1
 
 1. Search for the sequence `GNATNACCACTTCC` in the `SRR098026.fastq` file.
   Have your search return all matching lines and the name (or identifier) for each sequence
   that contains a match.
 
 2. Search for the sequence `AAGTT` in both FASTQ files.
-  Have your search return all matching lines and the name (or identifier) for each sequence
-  that contains a match.
-
-:::::::::::::::  solution
+  Have your search retrn all matching lines and the name (or identifier) for each sequence
+  that contains a match:::::  solution
 
 ## Solution
 
@@ -183,13 +153,10 @@ SRR097977.fastq:TTTATTTGTAAAGTTTTGTTGAAATAAGGGTTGTAA
 SRR097977.fastq-@SRR097977.238 209DTAAXX_Lenski2_1_7:8:3:592:919 length=36
 SRR097977.fastq:TTCTTACCATCCTGAAGTTTTTTCATCTTCCCTGAT
 --
-SRR098026.fastq-@SRR098026.158 HWUSI-EAS1599_1:2:1:1:1505 length=35
-SRR098026.fastq:GNNNNNNNNCAAAGTTGATCNNNNNNNNNTGTGCG
-```
+SRR098026.fastq-@SRR098026.158 HWUSI-EAS1599_1:2:1:1:1505 lngth=35
+SRR098026.fastq:GNNNNNNNNCAAAGTTGATCNNNNNNNNNTGTGCG``:::::
 
-:::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Redirecting output
 
@@ -213,7 +180,7 @@ in our FASTQ files that contain
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+
 
 ## File extensions
 
@@ -222,9 +189,9 @@ it will be holding FASTQ formatted data that we're extracting from our FASTQ fil
 also be a FASTQ file? The answer is, yes - it will be a FASTQ file and it would make sense to
 name it with a `.fastq` extension. However, using a `.fastq` extension will lead us to problems
 when we move to using wildcards later in this episode. We'll point out where this becomes
-important. For now, it's good that you're thinking about file extensions!
+important. For now, it's good that you're thinking about fileextensions!
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 The prompt should sit there a little bit, and then it should look like nothing
 happened. But type `ls`. You should see a new file called `bad_reads.txt`.
@@ -251,17 +218,12 @@ want only the number of lines, we can use the `-l` flag for `lines`.
 $ wc -l bad_reads.txt
 ```
 
-```output
+``output
 802 bad_reads.txt
-```
+``:::::::::  challenge
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
-
-How many sequences are there in `SRR098026.fastq`? Remember that every sequence is formed by four lines.
-
-:::::::::::::::  solution
+## Exercise 3 2
+How many sequences are there in `SRR098026.fastq`? Remember that every sequence is formed by four lines:::::  solution
 
 ## Solution
 
@@ -288,21 +250,13 @@ Note, this will do integer division - if you need floating point arithmetic you 
 $ echo "996/4" | bc
 ```
 
-```output
-249
-```
+``output
+249``:::::
 
-:::::::::::::::::::::::::
+:::::::::  challenge
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
-
-How many sequences in `SRR098026.fastq` contain at least 3 consecutive Ns?
-
-:::::::::::::::  solution
+## Exercise 4 3
+How many sequences in `SRR098026.fastq` contain at least 3 consecutive Ns:::::  solution
 
 ## Solution
 
@@ -311,13 +265,10 @@ $ grep NNN SRR098026.fastq > bad_reads.txt
 $ wc -l bad_reads.txt
 ```
 
-```output
-249
-```
+``output
+249``:::::
 
-:::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 We might want to search multiple FASTQ files for sequences that match our search pattern.
 However, we need to be careful, because each time we use the `>` command to redirect output
@@ -381,7 +332,7 @@ $ wc -l bad_reads.txt
 802 bad_reads.txt
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+
 
 ## File extensions - part 2
 
@@ -399,10 +350,9 @@ grep: input file ‘bad_reads.fastq' is also the output
 ```
 
 `grep` is letting you know that the output file `bad_reads.fastq` is also included in your
-`grep` call because it matches the `*.fastq` pattern. Be careful with this as it can lead to
-some unintended results.
+`grep` call because it matches the `*.fastq` pattern. Be careful with this as it can lead tosome unintended results.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Since we might have multiple different criteria we want to search for,
 creating a new output file each time has the potential to clutter up our workspace. We also
@@ -488,14 +438,13 @@ lines which do not match the searched pattern, in this case `'^--'`. The caret (
 character matching the beginning of the line, and the pattern has to be enclose by single quotes so `grep` does
 not interpret the pattern as an extended option (starting with --).
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+
 
 ## Custom `grep` control
 
-Use `man grep` to read more about other options to customize the output of `grep` including extended options,
-anchoring characters, and much more.
+Use `man grep` to read more about other options to customize the output of `grep` including extended options,anchoring characters, and much more.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 Redirecting output is often not intuitive, and can take some time to get used to. Once you're
 comfortable with redirection, however, you'll be able to combine any number of commands to
@@ -506,13 +455,13 @@ do anything all that impressive on their own, but when you start chaining
 them together, you can do some really powerful things very
 efficiently.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+
 
 ## File manipulation and more practices with pipes
 
-To practice a bit more with the tools we've added to our tool kit so far and learn a few extra ones you can follow [this extra lesson](Extra_lesson.md) which uses the SRA metadata file.
+To practice a bit more with the tools we've added to our tool kit so far and learn a few extra ones you can follow [this extra lesson](Extra_lesson.md) which uses the SRA metadatafile.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Writing for loops
 
@@ -623,17 +572,12 @@ Inside our for loop, we create a new name variable. We call the basename functio
 $ for filename in *.fastq
 > do
 > name=$(basename ${filename} .fastq)
-> echo ${name}
+>echo ${name}
 > done
-```
+``:::::::::  challenge
 
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
-
-Print the file prefix of all of the `.txt` files in our current directory.
-
-:::::::::::::::  solution
+## Exercise 4
+Print the file prefix of all of the `.txt` files in our current directory:::::  solution
 
 ## Solution
 
@@ -641,13 +585,10 @@ Print the file prefix of all of the `.txt` files in our current directory.
 $ for filename in *.txt
 > do
 > name=$(basename ${filename} .txt)
-> echo ${name}
-> done
-```
+>echo ${name}
+> done``:::::
 
-:::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 One way this is really useful is to move files. Let's rename all of our .txt files using `mv` so that they have the years on them, which will document when we created them.
 
@@ -655,17 +596,13 @@ One way this is really useful is to move files. Let's rename all of our .txt fil
 $ for filename in *.txt
 > do
 > name=$(basename ${filename} .txt)
-> mv ${filename}  ${name}_2019.txt
+>mv ${filename}  ${name}_2019.txt
 > done
-```
+``:::::::::  challenge
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+## Exercise 
 
-## Exercise
-
-Remove `_2019` from all of the `.txt` files.
-
-:::::::::::::::  solution
+Remove `_2019` from all of the `.txt` files:::::  solution
 
 ## Solution
 
@@ -673,23 +610,36 @@ Remove `_2019` from all of the `.txt` files.
 $ for filename in *_2019.txt
 > do
 > name=$(basename ${filename} _2019.txt)
-> mv ${filename} ${name}.txt
-> done
-```
+>mv ${filename} ${name}.txt
+> done``:::::
 
-:::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::: keypoints
+### keypoints
 
 - `grep` is a powerful search tool with many options for customization.
 - `>`, `>>`, and `|` are different ways of redirecting output.
 - `command > file` redirects a command's output to a file.
 - `command >> file` redirects a command's output to a file without overwriting the existing contents of the file.
 - `command_1 | command_2` redirects the output of the first command as input to the second command.
-- `for` loops are used for iteration.
-- `basename` gets rid of repetitive parts of names.
+- `for` loops are used for iteration.- `basename` gets rid of repetitive parts of names.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+
+
+## Custom `grep` control
+Open a new file and save it as "bad-reads-script.sh"
+
+We introduced the `-v` option in [the previous episode](04-redirection.md), now we
+are using `-h` to "Suppress the prefixing of file names on output" according to the documentation shown by `man grep`.
+```
+grep -B1 -A2 -h NNNNNNNNNN *.fastq | grep -v '^--' > scripted_bad_reads.txt
+```
+
+## Exercise 6
+
+We want the script to tell us when it's done.
+
+1. Open `bad-reads-script.sh` and add the line `echo "Script finished!"` after the `grep` command and save the file.
+2. Run the updated script.
